@@ -1,12 +1,18 @@
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/airbnb/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-# Airbnb JavaScript Style Guide() {
+# Guia de Estilo JavaScript Airbnb    {
 
-*A mostly reasonable approach to JavaScript*
+*Uma boa abordagem para JavaScript*
 
-[For the ES5-only guide click here](es5/).
+[For the ES5-only guide click here](i18n/PT-BR/es5/).
 
-## Table of Contents
+> **Nota de tradução**: Os títulos originais de cada seção será mantido, pois caso você queira buscar mais sobre estes assuntos futuramente, fazendo tal busca em inglês será obtido um resultado **imensamente** melhor.
+>
+> Após o título, estará a tradução auxiliar, quando necessária, visto que alguns termos são mais facilmente entendidos quando não traduzidos, por fazerem parte do núcleo do estudo em questão.
+>
+> Para eventuais erros de digitação e/ou tradução, favor enviar um pull-request!
+
+## Tabela de Conteúdo
 
   1. [Types](#types)
   1. [References](#references)
@@ -46,8 +52,9 @@
   1. [License](#license)
 
 ## Types
+ou *Tipos*
 
-  - [1.1](#1.1) <a name='1.1'></a> **Primitives**: When you access a primitive type you work directly on its value.
+  - [1.1](#1.1) <a name='1.1'></a> **Primitivos**: Quando você acessa um tipo primitivo você lida diretamente com seu valor.
 
     + `string`
     + `number`
@@ -63,7 +70,7 @@
 
     console.log(foo, bar); // => 1, 9
     ```
-  - [1.2](#1.2) <a name='1.2'></a> **Complex**: When you access a complex type you work on a reference to its value.
+  - [1.2](#1.2) <a name='1.2'></a> **Complexos**: Quando você acessa um tipo complexo você lida com a referência para seu valor.
 
     + `object`
     + `array`
@@ -78,46 +85,47 @@
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#table-of-contents)**
 
 ## References
+ou *Referencias*
 
-  - [2.1](#2.1) <a name='2.1'></a> Use `const` for all of your references; avoid using `var`.
+  - [2.1](#2.1) <a name='2.1'></a> Use `const`  para todas as suas referências; evite o uso de `var`.
 
-  > Why? This ensures that you can't reassign your references (mutation), which can lead to bugs and difficult to comprehend code.
+  > Porquê? Isso garante que você não pode realocar sua referências (mutação), o que pode levar a bugs e difícil compreensão de código.
 
     ```javascript
-    // bad
+    // ruim
     var a = 1;
     var b = 2;
 
-    // good
+    // bom
     const a = 1;
     const b = 2;
     ```
 
-  - [2.2](#2.2) <a name='2.2'></a> If you must mutate references, use `let` instead of `var`.
+  - [2.2](#2.2) <a name='2.2'></a> Se você deve sofrer mutações de referências, use `let` ao inves de `var`.
 
-  > Why? `let` is block-scoped rather than function-scoped like `var`.
+  > Porquê? `let` é block-scoped *escopo de bloco* ao invês de `var` que é function-scoped *função escopo*.
 
     ```javascript
-    // bad
+    // ruim
     var count = 1;
     if (true) {
       count += 1;
     }
 
-    // good, use the let.
+    // bom, use let.
     let count = 1;
     if (true) {
       count += 1;
     }
     ```
 
-  - [2.3](#2.3) <a name='2.3'></a> Note that both `let` and `const` are block-scoped.
+  - [2.3](#2.3) <a name='2.3'></a> Note que ambos `let` e `const` são block-scoped*escopo de bloco*.
 
     ```javascript
-    // const and let only exist in the blocks they are defined in.
+    // const and let só existem nos blocos definidos no objeto.
     {
       let a = 1;
       const b = 1;
@@ -126,59 +134,60 @@
     console.log(b); // ReferenceError
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#table-of-contents)**
 
 ## Objects
+ou *Objetos*
 
-  - [3.1](#3.1) <a name='3.1'></a> Use the literal syntax for object creation.
+  - [3.1](#3.1) <a name='3.1'></a> - Use a sintaxe literal para criar objetos.
 
     ```javascript
-    // bad
+    // ruim
     const item = new Object();
 
-    // good
+    // bom
     const item = {};
     ```
 
-  - [3.2](#3.2) <a name='3.2'></a> Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
+  - [3.2](#3.2) <a name='3.2'></a> Não use [palavras reservadas](http://es5.github.io/#x7.6.1) como chaves. Não vão funcionar no IE8. [Leia mais](https://github.com/airbnb/javascript/issues/61).
 
     ```javascript
-    // bad
+    // ruim
     const superman = {
       default: { clark: 'kent' },
       private: true
     };
 
-    // good
+    // bom
     const superman = {
       defaults: { clark: 'kent' },
       hidden: true
     };
     ```
 
-  - [3.3](#3.3) <a name='3.3'></a> Use readable synonyms in place of reserved words.
+  - [3.3](#3.3) <a name='3.3'></a> - Use sinônimos legíveis no lugar de palavras reservadas.
 
     ```javascript
-    // bad
+    // ruim
     const superman = {
       class: 'alien'
     };
 
-    // bad
+    // ruim
     const superman = {
       klass: 'alien'
     };
 
-    // good
+    // bom
     const superman = {
       type: 'alien'
     };
     ```
 
   <a name="es6-computed-properties"></a>
-  - [3.4](#3.4) <a name='3.4'></a> Use computed property names when creating objects with dynamic property names.
+  - [3.4](#3.4) <a name='3.4'></a> Use nomes de propriedades computadas ao criar objetos com nomes de propriedades dinâmicas.
 
-  > Why? They allow you to define all the properties of an object in one place.
+  > Porquê? Eles permitem que você possa definir todas as propriedades do objeto em um lugar só.
 
     ```javascript
 
@@ -186,14 +195,14 @@
       return `a key named ${k}`;
     }
 
-    // bad
+    // ruim
     const obj = {
       id: 5,
       name: 'San Francisco',
     };
     obj[getKey('enabled')] = true;
 
-    // good
+    // bom
     const obj = {
       id: 5,
       name: 'San Francisco',
@@ -202,10 +211,10 @@
     ```
 
   <a name="es6-object-shorthand"></a>
-  - [3.5](#3.5) <a name='3.5'></a> Use object method shorthand.
+  - [3.5](#3.5) <a name='3.5'></a> Use objeto método shorthand.
 
     ```javascript
-    // bad
+    // ruim
     const atom = {
       value: 1,
 
@@ -214,7 +223,7 @@
       },
     };
 
-    // good
+    // bom
     const atom = {
       value: 1,
 
@@ -225,33 +234,33 @@
     ```
 
   <a name="es6-object-concise"></a>
-  - [3.6](#3.6) <a name='3.6'></a> Use property value shorthand.
+  - [3.6](#3.6) <a name='3.6'></a> Use propriedade de valor shorthand.
 
-  > Why? It is shorter to write and descriptive.
+  > Porquê? É curto para escrever e simples.
 
     ```javascript
     const lukeSkywalker = 'Luke Skywalker';
 
-    // bad
+    // ruim
     const obj = {
       lukeSkywalker: lukeSkywalker
     };
 
-    // good
+    // bom
     const obj = {
       lukeSkywalker
     };
     ```
 
-  - [3.7](#3.7) <a name='3.7'></a> Group your shorthand properties at the beginning of your object declaration.
+  - [3.7](#3.7) <a name='3.7'></a> Agrupe suas propriedades abreviadas no início de sua declaração de objeto
 
-  > Why? It's easier to tell which properties are using the shorthand.
+  > PorquÊ? É mais fácil dizer quais  propriedades estão usando shorthand.
 
     ```javascript
     const anakinSkywalker = 'Anakin Skywalker';
     const lukeSkywalker = 'Luke Skywalker';
 
-    // bad
+    // ruim
     const obj = {
       episodeOne: 1,
       twoJedisWalkIntoACantina: 2,
@@ -261,7 +270,7 @@
       anakinSkywalker,
     };
 
-    // good
+    // bom
     const obj = {
       lukeSkywalker,
       anakinSkywalker,
@@ -272,17 +281,18 @@
     };
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ voltar ao topo](#table-of-contents)**
 
 ## Arrays
+ou *Vetores*
 
-  - [4.1](#4.1) <a name='4.1'></a> Use the literal syntax for array creation.
+  - [4.1](#4.1) <a name='4.1'></a> Use a sintaxe literal para criar Arrays.
 
     ```javascript
-    // bad
+    // ruim
     const items = new Array();
 
-    // good
+    // bom
     const items = [];
     ```
 
@@ -322,9 +332,10 @@
     const nodes = Array.from(foo);
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ Volta ao top](#table-of-contents)**
 
 ## Destructuring
+ou *Desestruturação*
 
   - [5.1](#5.1) <a name='5.1'></a> Use object destructuring when accessing and using multiple properties of an object.
 
@@ -1945,7 +1956,7 @@
 
 ## Resources
 
-**Learning ES6**
+**Aprenda ES6**
 
   - [Draft ECMA 2015 (ES6) Spec](https://people.mozilla.org/~jorendorff/es6-draft.html)
   - [ExploringJS](http://exploringjs.com/)
@@ -1956,26 +1967,26 @@
 
   - [Annotated ECMAScript 5.1](http://es5.github.com/)
 
-**Tools**
+**Ferramentas**
 
   - Code Style Linters
     + [JSHint](http://www.jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/jshintrc)
     + [JSCS](https://github.com/jscs-dev/node-jscs) - [Airbnb Style Preset](https://github.com/jscs-dev/node-jscs/blob/master/presets/airbnb.json)
 
-**Other Styleguides**
+**Outras Guias de Estilos**
 
   - [Google JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
   - [jQuery Core Style Guidelines](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
   - [Principles of Writing Consistent, Idiomatic JavaScript](https://github.com/rwldrn/idiomatic.js/)
 
-**Other Styles**
+**Outros Estilos**
 
   - [Naming this in nested functions](https://gist.github.com/4135065) - Christian Johansen
   - [Conditional Callbacks](https://github.com/airbnb/javascript/issues/52) - Ross Allen
   - [Popular JavaScript Coding Conventions on Github](http://sideeffect.kr/popularconvention/#javascript) - JeongHoon Byun
   - [Multiple var statements in JavaScript, not superfluous](http://benalman.com/news/2012/05/multiple-var-statements-javascript/) - Ben Alman
 
-**Further Reading**
+**Leitura Adicional**
 
   - [Understanding JavaScript Closures](http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/) - Angus Croll
   - [Basic JavaScript for the impatient programmer](http://www.2ality.com/2013/06/basic-javascript.html) - Dr. Axel Rauschmayer
@@ -1983,7 +1994,7 @@
   - [ES6 Features](https://github.com/lukehoban/es6features) - Luke Hoban
   - [Frontend Guidelines](https://github.com/bendc/frontend-guidelines) - Benjamin De Cock
 
-**Books**
+**Livros**
 
   - [JavaScript: The Good Parts](http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742) - Douglas Crockford
   - [JavaScript Patterns](http://www.amazon.com/JavaScript-Patterns-Stoyan-Stefanov/dp/0596806752) - Stoyan Stefanov
@@ -2019,11 +2030,11 @@
   - [JavaScript Jabber](http://devchat.tv/js-jabber/)
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ Voltar ao topo](#table-of-contents)**
 
-## In the Wild
+## Na Natureza
 
-  This is a list of organizations that are using this style guide. Send us a pull request or open an issue and we'll add you to the list.
+  Esta é uma lista de organizações que estão usando esta guia de estilo. Envie-nos um pull request ou abra uma issue que eu o adiciono na à lista.
 
   - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
   - **Adult Swim**: [adult-swim/javascript](https://github.com/adult-swim/javascript)
@@ -2093,17 +2104,17 @@
   - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spanish**: [paolocarrasco/javascript-style-guide](https://github.com/paolocarrasco/javascript-style-guide)
   - ![th](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Thailand.png) **Thai**: [lvarayut/javascript-style-guide](https://github.com/lvarayut/javascript-style-guide)
 
-## The JavaScript Style Guide Guide
+## Guia de Estilo Javascript
 
-  - [Reference](https://github.com/airbnb/javascript/wiki/The-JavaScript-Style-Guide-Guide)
+  - [Referência - en](https://github.com/airbnb/javascript/wiki/The-JavaScript-Style-Guide-Guide)
 
-## Chat With Us About JavaScript
+## Nosso Chat sobre Javascript
 
-  - Find us on [gitter](https://gitter.im/airbnb/javascript).
+  - Nós encontre em  [gitter](https://gitter.im/airbnb/javascript).
 
 ## Contributors
 
-  - [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
+  - [Veja os Contribuidores - en](https://github.com/airbnb/javascript/graphs/contributors)
 
 
 ## License
@@ -2133,4 +2144,5 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 **[⬆ back to top](#table-of-contents)**
 
+Translate by [Frederick Silva](fs.mit-license.org)
 # };
